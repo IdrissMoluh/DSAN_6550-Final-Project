@@ -1,51 +1,31 @@
 ItemID,Question,OptionA,OptionB,OptionC,OptionD,CorrectAnswer,a,b
-Q1,Anhedonia refers to:,Excessive worry,Inability to experience pleasure,Rapid cycling mood swings,Memory loss,Inability to experience pleasure,1.0,-1.5
-Q2,Which of the following is NOT a core symptom of Major Depressive Disorder?,Depressed mood,Diminished interest or pleasure,Hallucinations,Appetite disturbance,Hallucinations,1.0,-1.4473684210526316
-Q3,"According to DSM-5, how long must depressive symptoms persist to diagnose a Major Depressive Episode?",1 week,2 weeks,1 month,6 months,2 weeks,1.0,-1.3947368421052633
-Q4,Generalized Anxiety Disorder is characterized by:,Recurrent panic attacks,Persistent and excessive worry across multiple domains,Contamination obsessions,Flashbacks of traumatic events,Persistent and excessive worry across multiple domains,1.0,-1.3421052631578947
-Q5,Which neurotransmitter is most closely linked to depression?,Dopamine,GABA,Serotonin,Acetylcholine,Serotonin,1.0,-1.2894736842105263
-Q6,The GAD-7 scale measures symptoms of:,Depression,Generalized anxiety,Obsessive-compulsive disorder,Post-traumatic stress disorder,Generalized anxiety,1.0,-1.236842105263158
-Q7,A hallmark of ADHD hyperactive presentation is:,Daydreaming,Fidgeting or squirming,Social withdrawal,Obsessive counting,Fidgeting or squirming,1.0,-1.1842105263157894
-Q8,Which first-line medication class is used for ADHD?,Tricyclic antidepressants,"Stimulants (e.g., methylphenidate)",Beta-blockers,Benzodiazepines,"Stimulants (e.g., methylphenidate)",1.0,-1.131578947368421
-Q9,Obsessions and/or compulsions that are time-consuming define:,Panic disorder,Obsessive-compulsive disorder,Post-traumatic stress disorder,Major depressive disorder,Obsessive-compulsive disorder,1.0,-1.0789473684210527
-Q10,Which brain structure is hyperactive in many anxiety disorders?,Hippocampus,Amygdala,Prefrontal cortex,Cerebellum,Amygdala,1.0,-1.0263157894736843
-Q11,The first-line pharmacotherapy for most anxiety disorders is:,Benzodiazepines,MAO inhibitors,SSRIs,Antipsychotics,SSRIs,1.0,-0.9736842105263158
-Q12,Which tool screens for autism in toddlers?,M-CHAT-R/F,PHQ-9,GAD-7,BDI,M-CHAT-R/F,1.0,-0.9210526315789473
-Q13,“Neurodiversity” emphasizes:,Viewing all developmental conditions as pathology,Acceptance of neurological differences as natural variations,Cure-only approaches,Mandatory genetic testing for diagnosis,Acceptance of neurological differences as natural variations,1.0,-0.868421052631579
-Q14,Which assessment measures depression severity?,Beck Depression Inventory (BDI),GAD-7,Conners’ Continuous Performance Test,MMPI,Beck Depression Inventory (BDI),1.0,-0.8157894736842106
-Q15,Acute Stress Disorder differs from PTSD by symptom duration under:,1 week,2 weeks,1 month,6 months,1 month,1.0,-0.7631578947368421
-Q16,Which is a common cognitive distortion in anxiety?,Overgeneralization,Catastrophizing,Mind-reading,All of the above,All of the above,1.0,-0.7105263157894737
-Q17,Parotid gland enlargement can signal which eating disorder?,Anorexia nervosa,Bulimia nervosa,Binge-eating disorder,Depression,Bulimia nervosa,1.0,-0.6578947368421053
-Q18,Which therapy is first-line for Borderline Personality Disorder?,Dialectical Behavior Therapy (DBT),Psychoanalytic therapy,Exposure therapy,Stimulant medication,Dialectical Behavior Therapy (DBT),1.0,-0.605263157894737
-Q19,A key sign of substance withdrawal syndrome is:,Tolerance,Cravings,Characteristic signs and symptoms upon cessation,Social impairment,Characteristic signs and symptoms upon cessation,1.0,-0.5526315789473685
-Q20,ADHD inattentive presentation includes all EXCEPT:,Difficulty sustaining attention,Forgetfulness in daily activities,Excessive talking,Easily distracted,Excessive talking,1.0,-0.5
-Q21,Which hypothesis explains depression by low monoamine neurotransmitter levels?,Cortisol hypothesis,Monoamine hypothesis,Amygdala overactivity hypothesis,Genetic mutation hypothesis,Monoamine hypothesis,1.0,-0.4
-Q22,CBT for depression primarily targets:,Unconscious conflicts,Neurotransmitter imbalances,Maladaptive thoughts and behaviors,Family systems,Maladaptive thoughts and behaviors,1.0,-0.34285714285714286
-Q23,The DSM-5 diagnostic age cutoff for ADHD requires symptoms present before age:,5,7,12,18,12,1.0,-0.2857142857142857
-Q24,"In IRT, the 2PL model includes which parameters?",Difficulty & Discrimination,Guessing & Difficulty,Discrimination only,Guessing only,Difficulty & Discrimination,1.0,-0.2285714285714286
-Q25,A common stopping rule in CAT uses:,Fixed number of items,Desired ability precision,Time limit,Random stopping,Desired ability precision,1.0,-0.17142857142857143
-Q26,ICC stands for:,Item Characteristic Curve,Item Information Curve,Internal Consistency Coefficient,Item Count,Item Characteristic Curve,1.0,-0.11428571428571427
-Q27,IIC is maximized to select the next item in:,Classical Test Theory,IRT-based CAT,Diagnostic and Statistical Manual,CBT protocol,IRT-based CAT,1.0,-0.05714285714285716
-Q28,"In the 3PL IRT model, the “c” parameter represents:",Discrimination,Difficulty,Guessing,Information,Guessing,1.0,0.0
-Q29,"In PTSD, re-experiencing symptoms include:",Panic attacks,Flashbacks,Excessive worry,Anhedonia,Flashbacks,1.0,0.05714285714285716
-Q30,A key brain circuit implicated in OCD is:,Cortico-Striato-Thalamo-Cortical loop,Default mode network,Visual processing stream,Vestibular pathway,Cortico-Striato-Thalamo-Cortical loop,1.0,0.11428571428571432
-Q31,First-line SSRI treatment for OCD is often combined with:,Exposure and Response Prevention (ERP),Dialectical Behavior Therapy (DBT),Exposure only,Stimulant medication,Exposure and Response Prevention (ERP),1.0,0.17142857142857149
-Q32,Rapid-cycling bipolar disorder requires at least how many mood episodes per year?,2,4,6,8,4,1.0,0.22857142857142865
-Q33,Lithium’s primary mechanism is thought to involve modulation of:,Dopamine reuptake,"Intracellular second messengers (e.g., inositol monophosphate)",GABA receptors,NMDA receptors,"Intracellular second messengers (e.g., inositol monophosphate)",1.0,0.2857142857142857
-Q34,CAPS-5 is used to assess severity of:,Depression,PTSD,Anxiety disorders,Personality disorders,PTSD,1.0,0.34285714285714286
-Q35,Naltrexone is FDA-approved for:,Opioid use disorder,Alcohol use disorder,Cocaine use disorder,Depression,Opioid use disorder,1.0,0.4
-Q36,Bulimia Nervosa requires binge-eating episodes at least:,Once per week for 3 months,Once per month for 6 months,Twice per week for 1 month,Bi-weekly for 2 months,Once per week for 3 months,1.0,0.5
-Q37,Which physical sign is common in purging behaviors?,Lanugo hair,Parotid gland enlargement,Hypertension,Cyanosis,Parotid gland enlargement,1.0,0.5714285714285714
-Q38,Cluster A personality disorders include:,Paranoid and Schizoid,Histrionic and Narcissistic,Avoidant and Dependent,Borderline and Antisocial,Paranoid and Schizoid,1.0,0.6428571428571428
-Q39,Antisocial Personality Disorder requires evidence of conduct disorder before age:,10,12,15,18,12,1.0,0.7142857142857143
-Q40,The cortico-striato-thalamo-cortical loop is most implicated in:,Schizophrenia,Obsessive-Compulsive Disorder,Major depressive disorder,PTSD,Obsessive-Compulsive Disorder,1.0,0.7857142857142857
-Q41,Rapid-cycling bipolar is defined as ≥ 4 mood episodes within:,6 months,12 months,18 months,24 months,12 months,1.0,0.8571428571428571
-Q42,Which test assesses sustained attention in ADHD evaluations?,WAIS,Conners’ Continuous Performance Test (CPT),Rorschach Inkblot Test,Bender-Gestalt Test,Conners’ Continuous Performance Test (CPT),1.0,0.9285714285714286
-Q43,Neuroimaging often shows reduced volume in ADHD patients’:,Occipital lobe,Caudate nucleus,Medulla oblongata,Thalamus,Caudate nucleus,1.0,1.0
-Q44,A defining feature of Complex PTSD is:,Flashbacks,"Disturbances in self-organization (e.g., identity, relationships)",Panic attacks,Dissociative amnesia only,"Disturbances in self-organization (e.g., identity, relationships)",1.0,1.0714285714285714
-Q45,The monoamine hypothesis of depression does NOT include which neurotransmitter?,Serotonin,Norepinephrine,Dopamine,GABA,GABA,1.0,1.1428571428571428
-Q46,Which SSRI is preferred for comorbid depression and anxiety?,Sertraline,Paroxetine,Fluoxetine,Citalopram,Sertraline,1.0,1.2142857142857142
-Q47,ERP in OCD stands for:,Exposure and Response Prevention,Event-Related Potential,Error-Related Positivity,Early Recall Procedure,Exposure and Response Prevention,1.0,1.2857142857142856
-Q48,The Item Information Curve (IIC) plots:,Item information vs. ability level,Item difficulty vs. probability correct,Item Characteristic Curve,Guessing distribution,Item information vs. ability level,1.0,1.3571428571428572
-Q49,"In CAT, the typical starting ability (θ) is set at:",–3,0,+3,Random,0,1.0,1.4285714285714284
-Q50,A well-specified stopping rule in CAT balances:,Measurement precision and test length,Randomness,Item difficulty only,Time only,Measurement precision and test length,1.0,1.5
+Q1,What is 5 + 3?,6,7,8,9,C,1.0,-1.0
+Q2,Solve: 9 × 6,45,54,63,72,B,1.0,-1.0
+Q3,What is the square root of 49?,6,7,8,9,B,1.0,-1.0
+Q4,Solve for x: 2x + 3 = 11,3,4,5,6,C,1.0,-1.0
+Q5,Simplify: 3(2 + 4),18,12,9,21,A,1.0,-1.0
+Q6,25% of 200 is,25,50,75,100,B,1.0,-1.0
+Q7,What is 7 squared?,49,42,56,36,A,1.0,-1.0
+Q8,"If a triangle has angles 90°, 30°, the last angle?",30°,60°,90°,45°,B,1.0,-1.0
+Q9,Simplify: 16 ÷ 4 + 2,2,4,6,8,C,1.0,-1.0
+Q10,Which is a prime number?,4,6,9,11,D,1.0,-1.0
+Q11,Solve: x² = 144,±12,12,14,10,A,1.2,0.0
+Q12,Solve: 2x - 5 = 3x + 7,-12,12,6,-6,D,1.2,0.0
+Q13,"Median of [7, 5, 3, 9, 1]?",1,3,5,7,C,1.2,0.0
+Q14,Factor: x² - 5x + 6,(x-2)(x-3),(x+2)(x-3),(x-3)(x+1),(x-6)(x+1),A,1.2,0.0
+Q15,Simplify: (3x²)(2x³),6x⁶,6x⁵,5x⁶,5x⁵,B,1.2,0.0
+Q16,Solve: 3(2x - 1) = 15,2,3,4,5,B,1.2,0.0
+Q17,30% of 250,65,70,75,80,C,1.2,0.0
+Q18,"f(x) = x² - 2x + 1, f(3) = ?",4,2,1,0,C,1.2,0.0
+Q19,Divisible by both 3 and 5?,12,15,25,45,B,1.2,0.0
+Q20,Convert 0.75 to fraction,1/3,3/4,2/5,4/5,B,1.2,0.0
+Q21,Solve: log₁₀(1000) = ?,2,3,10,100,B,1.5,1.0
+Q22,Derivative of x³ + 2x,3x² + 2,2x + 3x²,3x + 2x²,2x² + 3,A,1.5,1.0
+Q23,Solve: ∫x dx,x,x²/2,x²,1/x,B,1.5,1.0
+Q24,"If sin(x) = 0.5, then x=? (0°–180°)",60°,90°,120°,A & C,D,1.5,1.0
+Q25,Solve: 3x - 4 > 5,x>3,x<3,x>4,x>2,A,1.5,1.0
+Q26,"det([[1,2],[3,4]])?",-2,-4,2,10,A,1.5,1.0
+Q27,Probability of rolling 7 with 2 dice?,1/6,1/5,1/12,1/36,A,1.5,1.0
+Q28,"If x = log₂(8), x=?",2,3,4,5,B,1.5,1.0
+Q29,Solve: 2ⁿ = 32,4,5,6,7,B,1.5,1.0
+Q30,Area of a circle with r=3,9π,6π,3π,π,A,1.5,1.0
