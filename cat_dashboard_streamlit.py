@@ -69,4 +69,62 @@ def on_submit():
     st.session_state.theta_hist.append(th)
     st.session_state.se_hist.append(se(th, a_list, b_list))
 
-    # choose next item by max information at new
+    # choose next item by max information at new th
+    remaining = [i for i in df.index if i not in st.session_state.asked]
+    if remaining:
+        infos = df.loc[remaining].apply(lambda r: info(th, r.a, r.b), axis=1)
+        st.session_state.current_item = infos.idxmax()
+
+    # clear out old answer so widget resets
+    del st.session_state[f"resp_{cid}"]
+
+# --- Sidebar: show question & collect answer ---
+cid = st.session_state.current_item
+row = df.loc[cid]
+
+st.sidebar.markdown(f"### Question: {row.Question}")
+options = [row.OptionA, row.OptionB, row.OptionC, row.OptionD]
+st.sidebar.radio("Pick one:", options, key=f"resp_{cid}")
+st.sidebar.button("Submit", on_click=on_submit)
+
+# --- Main page: CAT Dashboard ---
+st.title("Computerized Adaptive Test Demo (2PL)")
+
+th_now = st.session_state.theta_hist[-1]
+thetas = np.linspace(-4, 4, 200)
+
+# 1. Current Item ICC
+st.subheader("1. Current Item ICC")
+fig1, ax1 = plt.subplots()
+ax1.plot(thetas, P(thetas, row.a, row.b))
+ax1.axvline(th_now, color="red", linestyle="--", label=f"θ = {th_now:.2f}")
+ax1.set_xlabel("θ")
+ax1.set_ylabel("P(correct)")
+ax1.legend()
+st.pyplot(fig1)
+
+# 2. Current Item IIC
+st.subheader("2. Current Item IIC")
+fig2, ax2 = plt.subplots()
+ax2.plot(thetas, info(thetas, row.a, row.b))
+ax2.axvline(th_now, color="red", linestyle="--")
+ax2.set_xlabel("θ")
+ax2.set_ylabel("Information")
+st.pyplot(fig2)
+
+# 3. Standard Error History
+st.subheader("3. Standard Error θ History")
+fig3, ax3 = plt.subplots()
+ax3.plot(st.session_state.se_hist, marker='o')
+ax3.set_xlabel("Step")
+ax3.set_ylabel("SE(θ)")
+st.pyplot(fig3)
+
+# 4. Latent Trait Estimate History
+st.subheader("4. Latent Trait Estimate History")
+fig4, ax4 = plt.subplots()
+ax4.plot(st.session_state.theta_hist, marker='o')
+ax4.set_xlabel("Step")
+ax4.set_ylabel("θ Estimate")
+st.pyplot(fig4)
+
