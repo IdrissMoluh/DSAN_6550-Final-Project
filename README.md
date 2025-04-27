@@ -18,7 +18,7 @@ Our item pool focuses on **General Math Assessment** — including algebra, arit
 
 ## 📋 Project Structure
 
-- `cat_dashboard.py` → Main Streamlit app
+- `cat_dashboard_streamlit.py` → Main Streamlit app
 - `data/item_bank2.csv` → Item pool (30 math items with calibrated 2PL parameters)
 - `requirements.txt` → Project dependencies list
 
