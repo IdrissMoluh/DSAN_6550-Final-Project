@@ -37,10 +37,10 @@ pip install -r requirements.txt
 3. **Run the app**:
 
 ```bash
-streamlit run cat_dashboard.py
+streamlit run cat_dashboard_streamlit.py
 ```
 
-4. Open the provided **localhost URL** (http://localhost:8501) in your browser.
+4. Open the provided **localhost URL** (http://localhost:8501) in our browser.
 
 ---
 
