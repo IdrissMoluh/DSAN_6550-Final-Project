@@ -1,121 +1,140 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import matplotlib as mpl
 import matplotlib.pyplot as plt
 
-# --- Helper functions ---
-def prob_2pl(theta, a, b):
-    return 1 / (1 + np.exp(-a * (theta - b)))
+# ─── Reset matplotlib to defaults to avoid loading any custom style ───
+mpl.rcParams.update(mpl.rcParamsDefault)
+plt.style.use('default')
 
-def item_information(theta, a, b):
-    p = prob_2pl(theta, a, b)
+# ─── IRT helper functions (2PL) ───────────────────────────────────────
+def P(theta, a, b):
+    return 1.0 / (1.0 + np.exp(-a * (theta - b)))
+
+def info(theta, a, b):
+    p = P(theta, a, b)
     return a**2 * p * (1 - p)
 
-def mle_theta(responses, a_vals, b_vals):
-    resp = np.array(responses, dtype=float)
-    a_ = np.array(a_vals, dtype=float)
-    b_ = np.array(b_vals, dtype=float)
-    theta_grid = np.linspace(-4, 4, 161)
-    best_ll = -np.inf
-    best_theta = 0.0
-    for th in theta_grid:
-        p = prob_2pl(th, a_, b_)
-        ll = np.sum(resp * np.log(p + 1e-9) + (1-resp) * np.log(1-p + 1e-9))
+def mle_theta(responses, a_list, b_list):
+    resps = np.array(responses)
+    thetas = np.linspace(-4, 4, 161)
+    best_ll, best_th = -np.inf, 0.0
+    for th in thetas:
+        p = P(th, np.array(a_list), np.array(b_list))
+        ll = np.sum(resps * np.log(p + 1e-9) + (1 - resps) * np.log(1 - p + 1e-9))
         if ll > best_ll:
-            best_ll = ll
-            best_theta = th
-    return best_theta
+            best_ll, best_th = ll, th
+    return best_th
 
-def compute_se(theta, a_vals, b_vals):
-    infos = [item_information(theta, a, b) for a, b in zip(a_vals, b_vals)]
+def se(theta, a_list, b_list):
+    infos = [info(theta, a, b) for a, b in zip(a_list, b_list)]
     total = np.sum(infos)
-    return 1/np.sqrt(total) if total>0 else None
+    return 1/np.sqrt(total) if total > 0 else None
 
-# --- Load item bank ---
-item_bank = pd.read_csv('data/item_bank2.csv').set_index('ItemID')
-
-def initialize_state():
-    # Initialize session state variables
-    if 'asked' not in st.session_state:
-        st.session_state.asked = []
-        st.session_state.responses = []
-        st.session_state.theta = [0.0]
-        st.session_state.se = [None]
-        # Pick medium-difficulty item to start
-        init = item_bank['b'].abs().idxmin()
-        st.session_state.current = init
-
-initialize_state()
-
-# Stop rule
+# ─── Configuration ────────────────────────────────────────────────────
 MAX_ITEMS = 10
-if len(st.session_state.asked) >= MAX_ITEMS:
-    st.title("CAT Complete")
-    st.write(f"Test finished after {MAX_ITEMS} items.")
-    st.write("Final θ estimate:", st.session_state.theta[-1])
-    st.stop()
 
-# Display question
-st.title("CAT Dashboard")
-step = len(st.session_state.asked) + 1
-st.write(f"Question {step} of {MAX_ITEMS}")
-cur_id = st.session_state.current
-row = item_bank.loc[cur_id]
-st.write(f"**{row['Question']}**")
-opts = [row['OptionA'], row['OptionB'], row['OptionC'], row['OptionD']]
-selected_key = f"choice_{cur_id}"
-selected = st.radio("Options", opts, key=selected_key)
+# ─── Load item bank ───────────────────────────────────────────────────
+df = pd.read_csv("data/item_bank2.csv").set_index("ItemID")
 
-# Submission callback
+# ─── Session state initialization ─────────────────────────────────────
+if "asked" not in st.session_state:
+    st.session_state.asked = []           # list of ItemIDs already seen
+    st.session_state.responses = []       # corresponding 0/1 responses
+    # pick first item: b closest to 0
+    st.session_state.current_item = df["b"].abs().idxmin()
+    st.session_state.theta_hist = [0.0]   # theta estimates
+    st.session_state.se_hist = [None]     # standard errors
+
+# ─── Submit callback ──────────────────────────────────────────────────
 def on_submit():
-    # record response
-    correct = row['CorrectAnswer']
-    resp = 1 if selected == correct else 0
-    st.session_state.asked.append(cur_id)
+    cid = st.session_state.current_item
+    # re-fetch row
+    row = df.loc[cid]
+    # figure out which option text was picked
+    selected_text = st.session_state[f"resp_{cid}"]
+    # map correct letter -> correct text
+    correct_letter = row["CorrectAnswer"]
+    correct_text   = row[f"Option{correct_letter}"]
+    # score
+    resp = 1 if selected_text == correct_text else 0
+
+    # log response & question
     st.session_state.responses.append(resp)
-    # update θ and SE
-    a_list = [item_bank.loc[i,'a'] for i in st.session_state.asked]
-    b_list = [item_bank.loc[i,'b'] for i in st.session_state.asked]
-    th_new = mle_theta(st.session_state.responses, a_list, b_list)
-    se_new = compute_se(th_new, a_list, b_list)
-    st.session_state.theta.append(th_new)
-    st.session_state.se.append(se_new)
-    # choose next item
-    remain = item_bank.drop(index=st.session_state.asked)
-    infos = remain.apply(lambda r: item_information(th_new, r['a'], r['b']), axis=1)
-    st.session_state.current = infos.idxmax()
-    # clear previous selection to avoid stale key
-    del st.session_state[selected_key]
+    st.session_state.asked.append(cid)
 
-st.button("Submit Answer", on_click=on_submit)
+    # re-estimate theta & SE
+    a_list = df.loc[st.session_state.asked, "a"].tolist()
+    b_list = df.loc[st.session_state.asked, "b"].tolist()
+    th     = mle_theta(st.session_state.responses, a_list, b_list)
+    st.session_state.theta_hist.append(th)
+    st.session_state.se_hist.append(se(th, a_list, b_list))
 
-# Plots
-steps = list(range(len(st.session_state.theta)))
-theta_vals = np.linspace(-4,4,200)
-th_cur = st.session_state.theta[-1]
+    # pick next item by max information at new theta
+    if len(st.session_state.asked) < MAX_ITEMS:
+        remaining = [i for i in df.index if i not in st.session_state.asked]
+        if remaining:
+            infos = df.loc[remaining].apply(lambda r: info(th, r.a, r.b), axis=1)
+            st.session_state.current_item = infos.idxmax()
 
-st.subheader("Current Item ICC")
+    # clear out old radio value so next question is blank
+    del st.session_state[f"resp_{cid}"]
+
+# ─── Sidebar: question & answer ───────────────────────────────────────
+if len(st.session_state.asked) < MAX_ITEMS:
+    cid = st.session_state.current_item
+    row = df.loc[cid]
+
+    st.sidebar.markdown(f"### Question: {row.Question}")
+    options = [row.OptionA, row.OptionB, row.OptionC, row.OptionD]
+    st.sidebar.radio("Pick one:", options, key=f"resp_{cid}")
+    st.sidebar.button("Submit", on_click=on_submit)
+else:
+    # test complete
+    final_theta = st.session_state.theta_hist[-1]
+    st.sidebar.markdown("## Test Complete")
+    st.sidebar.markdown(f"**Final θ estimate:** {final_theta:.2f}")
+
+# ─── Main page: display the four plots ────────────────────────────────
+st.title("Computerized Adaptive Test Demo (2PL)")
+
+# current theta & grid
+th_now = st.session_state.theta_hist[-1]
+thetas = np.linspace(-4, 4, 200)
+
+# 1. ICC
+st.subheader("1. Current Item ICC")
 fig1, ax1 = plt.subplots()
-ax1.plot(theta_vals, prob_2pl(theta_vals, row['a'], row['b']))
-ax1.axvline(th_cur, color='red', linestyle='--')
-ax1.set_ylabel('P(correct)')
+# if we have a current item
+if len(st.session_state.asked) < MAX_ITEMS:
+    row = df.loc[st.session_state.current_item]
+    ax1.plot(thetas, P(thetas, row.a, row.b))
+    ax1.axvline(th_now, color="red", linestyle="--", label=f"θ = {th_now:.2f}")
+    ax1.set_xlabel("θ"); ax1.set_ylabel("P(correct)")
+    ax1.legend()
 st.pyplot(fig1)
 
-st.subheader("Current Item IIC")
+# 2. IIC
+st.subheader("2. Current Item Information (IIC)")
 fig2, ax2 = plt.subplots()
-ax2.plot(theta_vals, item_information(theta_vals, row['a'], row['b']))
-ax2.axvline(th_cur, color='red', linestyle='--')
-ax2.set_ylabel('Information')
+if len(st.session_state.asked) < MAX_ITEMS:
+    row = df.loc[st.session_state.current_item]
+    ax2.plot(thetas, info(thetas, row.a, row.b))
+    ax2.axvline(th_now, color="red", linestyle="--")
+    ax2.set_xlabel("θ"); ax2.set_ylabel("Information")
 st.pyplot(fig2)
 
-st.subheader("Standard Error History")
+# 3. SE History
+st.subheader("3. Standard Error History")
 fig3, ax3 = plt.subplots()
-ax3.plot(steps, st.session_state.se, marker='o')
-ax3.set_ylabel('SE(θ)')
+ax3.plot(st.session_state.se_hist, marker='o')
+ax3.set_xlabel("Step"); ax3.set_ylabel("SE(θ)")
 st.pyplot(fig3)
 
-st.subheader("Theta Estimate History")
+# 4. Theta History
+st.subheader("4. Latent Trait Estimate History")
 fig4, ax4 = plt.subplots()
-ax4.plot(steps, st.session_state.theta, marker='o')
-ax4.set_ylabel('θ')
+ax4.plot(st.session_state.theta_hist, marker='o')
+ax4.set_xlabel("Step"); ax4.set_ylabel("θ Estimate")
 st.pyplot(fig4)
