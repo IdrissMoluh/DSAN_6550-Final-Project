@@ -169,7 +169,7 @@ These items cover:
 - Xiaolong Zhou  
 - Qingqing Chen  
 
-(For DSAN 6550: Adaptive Measurement with AI, Spring 2025)
+(For DSAN 6550: Adaptive Measurement with AI, Spring 2025). Thanks!
 
 
 
