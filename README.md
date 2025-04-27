@@ -40,7 +40,7 @@ pip install -r requirements.txt
 streamlit run cat_dashboard.py
 ```
 
-4. Open the provided **localhost URL** (http://localhost:8501) in my browser.
+4. Open the provided **localhost URL** (http://localhost:8501) in your browser.
 
 ---
 
@@ -81,24 +81,65 @@ streamlit run cat_dashboard.py
 
 ## 📚 About the Item Bank (Sample)
 
-The `item_bank2.csv` contains **30 calibrated math items** based on the 2PL IRT model.  
+The `item_bank2.csv` contains **30 calibrated math items** based on the **2PL IRT model**.  
 Each item includes:
-- 4 answer options (A, B, C, D)
-- Correct answer key
-- Discrimination parameter (`a`)
-- Difficulty parameter (`b`) : **Easy** `b ≈ -1` / **Medium** `b ≈ 0` / **Hard** `b ≈ 1`.
 
-### Example Items:
+- 4 answer options (**A**, **B**, **C**, **D**)
+- A correct answer key
+- A discrimination parameter (`a`)
+- A difficulty parameter (`b`) categorized as:
+  - **Easy**: `b ≈ -1`
+  - **Medium**: `b ≈ 0`
+  - **Hard**: `b ≈ 1`
 
-| ItemID | Question | Correct Answer | Difficulty (b) |
-|:------:|:---------|:---------------:|:--------------:|
-| Q1 | What is 5 + 3? | 8 (Option C) | -1 |
-| Q2 | Solve: 9 × 6 | 54 (Option B) | -1 |
-| Q3 | What is the square root of 49? | 7 (Option B) | -1 |
-| Q11 | Solve: x² = 144 | ±12 (Option A) | 0 |
-| Q21 | Solve: log₁₀(1000) = ? | 3 (Option B) | 1 |
+These items cover:
 
-> The item bank covers basic operations, equations, factoring, percentages, derivatives, logarithms, trigonometry, and basic probability.
+- Basic operations
+- Solving equations
+- Factoring
+- Percentages
+- Trigonometric identities
+- Basic probability
+- Derivatives
+- Logarithms
+- Area formulas
+
+---
+
+## 📚 Full Item Bank (`item_bank2.csv`)
+
+| ItemID | Question | Option A | Option B | Option C | Option D | Correct Answer | a | b |
+|:------:|:---------|:---------|:---------|:---------|:---------|:---------------:|:-:|:-:|
+| Q1 | What is 5 + 3? | 6 | 7 | 8 | 9 | C | 1 | -1 |
+| Q2 | Solve: 9 × 6 | 45 | 54 | 63 | 72 | B | 1 | -1 |
+| Q3 | What is the square root of 49? | 6 | 7 | 8 | 9 | B | 1 | -1 |
+| Q4 | Solve for x: 2x + 3 = 11 | 3 | 4 | 5 | 6 | C | 1 | -1 |
+| Q5 | Simplify: 3(2 + 4) | 18 | 12 | 9 | 21 | A | 1 | -1 |
+| Q6 | 25% of 200 is | 25 | 50 | 75 | 100 | B | 1 | -1 |
+| Q7 | What is 7 squared? | 49 | 42 | 56 | 36 | A | 1 | -1 |
+| Q8 | If a triangle has angles 90°, 30°, the last angle? | 30° | 60° | 90° | 45° | B | 1 | -1 |
+| Q9 | Simplify: 16 ÷ 4 + 2 | 2 | 4 | 6 | 8 | C | 1 | -1 |
+| Q10 | Which is a prime number? | 4 | 6 | 9 | 11 | D | 1 | -1 |
+| Q11 | Solve: x² = 144 | ±12 | 12 | 14 | 10 | A | 1.2 | 0 |
+| Q12 | Solve: 2x - 5 = 3x + 7 | -12 | 12 | 6 | -6 | D | 1.2 | 0 |
+| Q13 | Median of [7,5,3,9,1]? | 1 | 3 | 5 | 7 | C | 1.2 | 0 |
+| Q14 | Factor: x² - 5x + 6 | (x-2)(x-3) | (x+2)(x-3) | (x-3)(x+1) | (x-6)(x+1) | A | 1.2 | 0 |
+| Q15 | Simplify: (3x²)(2x³) | 6x⁵ | 6x⁶ | 5x⁶ | 5x⁵ | B | 1.2 | 0 |
+| Q16 | Solve: 3(2x - 1) = 15 | 2 | 3 | 4 | 5 | B | 1.2 | 0 |
+| Q17 | 30% of 250 | 65 | 70 | 75 | 80 | C | 1.2 | 0 |
+| Q18 | f(x) = x² - 2x + 1, f(3) = ? | 4 | 2 | 1 | 0 | C | 1.2 | 0 |
+| Q19 | Divisible by both 3 and 5? | 12 | 15 | 25 | 45 | B | 1.2 | 0 |
+| Q20 | Convert 0.75 to fraction | 3-Jan | 4-Mar | 5-Feb | 5-Apr | B | 1.2 | 0 |
+| Q21 | Solve: log₁₀(1000) = ? | 2 | 3 | 10 | 100 | B | 1.5 | 1 |
+| Q22 | Derivative of x³ + 2x | 3x² + 2 | 2x + 3x² | 3x + 2x² | 2x² + 3 | A | 1.5 | 1 |
+| Q23 | Solve: ∫x dx | x | x²/2 | x² | 1/x | B | 1.5 | 1 |
+| Q24 | If sin(x) = 0.5, then x=? (0°–180°) | 60° | 90° | 120° | A & C | D | 1.5 | 1 |
+| Q25 | Solve: 3x - 4 > 5 | x>3 | x<3 | x>4 | x>2 | A | 1.5 | 1 |
+| Q26 | det([[1,2],[3,4]])? | -2 | -4 | 2 | 10 | A | 1.5 | 1 |
+| Q27 | Probability of rolling 7 with 2 dice? | 6-Jan | 5-Jan | 12-Jan | Jan-36 | A | 1.5 | 1 |
+| Q28 | If x = log₂(8), x=? | 2 | 3 | 4 | 5 | B | 1.5 | 1 |
+| Q29 | Solve: 2ˣ = 32 | 4 | 5 | 6 | 7 | B | 1.5 | 1 |
+| Q30 | Area of a circle with r=3 | 9π | 6π | 3π | π | A | 1.5 | 1 |
 
 ---
 
